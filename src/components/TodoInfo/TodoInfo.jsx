@@ -1,18 +1,17 @@
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 import './TodoInfo.scss';
 import { UserInfo } from '../UserInfo';
 
-export const TodoInfo = ({ todo }) => {
+export const TodoInfo = ({ todo = {} }) => {
   return (
     <article
-      className={classnames(
-        'TodoInfo',
-        todo.completed && 'TodoInfo--completed',
-      )}
+      className={classNames('TodoInfo', {
+        'TodoInfo--completed': todo.completed,
+      })}
     >
-      <h2 className="TodoInfo__title">{todo.title}</h2>
-      <UserInfo user={todo.user} />
+      <h2 className="TodoInfo__title">{todo.title || 'Untitled Todo'}</h2>
+      {todo.user && <UserInfo user={todo.user} />}
     </article>
   );
 };
